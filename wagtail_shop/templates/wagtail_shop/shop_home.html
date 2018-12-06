@@ -1,0 +1,27 @@
+{% extends 'wagtail_shop/shop/base.html' %}
+{% load wagtailimages_tags %}
+{% load wagtailcore_tags %}
+{% block body_class %}shop-home{% endblock %}
+{% block navigation %}
+<ul>
+  <li><a href="{{ page.url }}">Shop</a></li>
+  <li><a href="{{ page.url }}basket/">Basket</a></li>
+</ul>
+{% endblock %}
+{% block content %}
+<h2>Hello</h2>
+
+<h3>All Products</h3>
+{% for product in products %}
+<p>{{ product.title }}</p>
+{% image product.images.all.0.image width-400 %}
+<form action="/api/basket/add-product/" method="post">
+  {% csrf_token %}
+  <input name="quantity" type="number" value="1"/>
+  <input name="url" type="hidden" value="/api/products/{{ product.id }}/"/>
+  <input name="next" type="hidden" value="/shop/"/>
+  <button type="submit">Add to cart</button>
+</form>
+{% endfor %}
+{{ basket }}
+{% endblock %}

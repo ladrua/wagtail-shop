@@ -1,0 +1,171 @@
+.products-list .field-admin_thumb {
+  width: 10%; }
+
+.products-list .listing td {
+  font-size: 14px;
+  vertical-align: middle; }
+  .products-list .listing td.field-active img {
+    width: 20px; }
+  .products-list .listing td.field-title {
+    font-size: 18px;
+    color: #43b1b0; }
+
+.products-list .listing tbody tr:hover {
+  cursor: pointer; }
+
+.order-list .listing tbody tr:hover {
+  cursor: pointer; }
+
+.order-list .listing ul.actions {
+  display: none; }
+
+.order-detail-page {
+  max-width: 1400px; }
+
+.top-order-row .col6 {
+  padding: 0; }
+
+.top-order-row dd.pending {
+  color: #e9b04d;
+  font-size: 16px; }
+
+.top-order-row dd.completed {
+  color: #189370;
+  font-size: 16px; }
+
+.top-order-row dd.cancelled {
+  color: #cd3238;
+  font-size: 16px; }
+
+.top-order-row .customer-details {
+  background-color: #404040;
+  color: #e6e6e6;
+  padding: 20px; }
+
+table.order_items {
+  width: 100%;
+  background-color: #e6e6e6; }
+  table.order_items thead tr {
+    background-color: #404040;
+    color: white; }
+  table.order_items thead td {
+    font-weight: bold;
+    padding: 10px;
+    font-size: 10px; }
+  table.order_items tbody tr td:first-child {
+    border-left: 1px solid #d9d9d9; }
+  table.order_items tbody tr td:last-child {
+    border-right: 1px solid #d9d9d9; }
+  table.order_items tbody td {
+    padding: 10px;
+    border-bottom: 1px solid #d9d9d9; }
+
+footer button.pending {
+  background-color: #e9b04d;
+  border-color: #e9b04d; }
+
+.total-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding-top: 20px; }
+  .total-row .payments table {
+    width: 100%;
+    max-width: 500px; }
+    .total-row .payments table thead th {
+      text-align: left;
+      border-bottom: 1px solid #666; }
+  .total-row .total-detail {
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 0; }
+    .total-row .total-detail table {
+      width: 100%;
+      background-color: #e6e6e6; }
+      .total-row .total-detail table td.def {
+        width: auto;
+        text-align: right;
+        background-color: #666;
+        color: white;
+        padding-right: 20px; }
+        .total-row .total-detail table td.def.tot {
+          padding: 20px;
+          font-size: 18px; }
+      .total-row .total-detail table td.val {
+        width: 75%;
+        padding-left: 20px; }
+        .total-row .total-detail table td.val.tot {
+          font-size: 18px;
+          font-weight: bold; }
+      .total-row .total-detail table td {
+        border: 2px solid #666; }
+
+.resendconfirmation-input {
+  display: none; }
+  .resendconfirmation-input form {
+    display: flex; }
+  .resendconfirmation-input input {
+    display: inline-block;
+    width: 200px;
+    height: 2.35em;
+    margin: 0; }
+  .resendconfirmation-input .button-group {
+    display: inline-block; }
+  .resendconfirmation-input button {
+    display: inline-block; }
+
+.loading {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  justify-content: center;
+  align-items: center; }
+
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px; }
+
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 51px;
+  height: 51px;
+  margin: 6px;
+  border: 6px solid #fff;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #fff transparent transparent transparent; }
+
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s; }
+
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s; }
+
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s; }
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
+.product-index-page .addbutton {
+  width: 200px; }
+  .product-index-page .addbutton .dropdown-toggle span {
+    margin-left: 5px; }
+  .product-index-page .addbutton .dropdown .add-product-button {
+    padding-right: 10px; }
+  .product-index-page .addbutton .dropdown ul {
+    display: none;
+    margin-top: 37px; }
+  .product-index-page .addbutton .dropdown.open ul {
+    display: block; }

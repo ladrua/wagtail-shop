@@ -1,0 +1,3 @@
+wagtail
+django-oscar
+django-oscar-api

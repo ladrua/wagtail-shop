@@ -1,0 +1,217 @@
+{% extends "wagtailadmin/base.html" %}
+{% load i18n admin_static currency_filters %}
+
+{% block titletag %}{{ view.get_meta_title }}{% endblock %}
+
+{% block extra_css %}
+    {{ view.media.css }}
+    <link rel="stylesheet" href="{% static 'wagtailmodeladmin/css/breadcrumbs_page.css' %}" type="text/css"/>
+{% endblock %}
+
+{% block extra_js %}
+    {{ view.media.js }}
+{% endblock %}
+
+{% block content %}
+
+    {% block header %}
+        {% include "modeladmin/includes/header_with_breadcrumb.html" with title=view.get_page_title subtitle=view.get_page_subtitle icon=view.header_icon tabbed=True %}
+    {% endblock %}
+
+    <div>
+
+        {% block content_main %}
+            <div class="nice-padding order-detail-page">
+
+                <p class="back"><a href="{{ view.index_url }}" class="icon icon-arrow-left">{% blocktrans with view.verbose_name as model_name %}Back to {{ model_name }} list{% endblocktrans %}</a></p>
+
+                    <dl>
+                        <div class="row top-order-row">
+                            <div class="col6">
+                                    <dt>Order Number</dt>
+                                    <dd>{{ instance.number }}</dd>
+                                    <dt>Date Placed</dt>
+                                    <dd>{{ instance.date_placed }}</dd>
+                                    <dt>Status</dt>
+                                    {% if instance.status == "Pending" %}
+                                        <dd class="pending">{{ instance.status }}</dd>
+                                    {% endif %}
+                                    {% if instance.status == "Completed" %}
+                                        <dd class="completed">{{ instance.status }}</dd>
+                                    {% endif %}
+                                    {% if instance.status == "Cancelled" %}
+                                        <dd class="cancelled">{{ instance.status }}</dd>
+                                    {% endif %}
+                            </div>
+                            <div class="col6 customer-details">
+                                <dt class="">
+                                        Customer
+                                </dt>
+                                <dd>{{ instance.user.get_full_name }} (<a href="mailto:{{ instance.user.email }}">{{ instance.user.email }}</a>)</dd>
+
+                                <dt class="">
+                                        Shipping Address
+                                </dt>
+                                <dd>{{ instance.shipping_address }}</dd>
+                            </div>
+                        </div>
+
+                        <div class="items-row">
+
+                                <div class="order_items-wrapper">
+                                    <table class="order_items">
+                                        <thead>
+                                            <tr>
+                                                <td class="item">Item</td>
+                                                <td class="quantity">Quantity</td>
+                                                <td class="price">Price (inc VAT)</td>
+                                                <td class="message">Options</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for line in instance.lines.all  %}
+                                            <tr>
+                                                <td class="item">
+                                                    {% if line.product %}
+                                                        <h3>{{ line.title }}</h3>
+                                                    {% else %}
+                                                        <h3>{{ line.title }} (Deleted product)</h3>
+
+                                                    {% endif %}
+                                                </td>
+
+                                                <td class="quantity">
+                                                    {{ line.quantity }}
+                                                </td>
+                                                <td class="price">{{ line.line_price_incl_tax|currency:instance.currency }}</td>
+                                                <td class="message">
+                                                    {% for attribute in line.attributes.all %}
+                    									{% if attribute.value|length > 0 %}
+                    										<p>{{ attribute.option.name }}: "{{ attribute.value }}"</p>
+                                                        {% else %}
+                                                            <p>*No {{ attribute.option.name }} given *</p>
+                    									{% endif %}
+                    								{% endfor%}
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                        </div>
+
+                    </dl>
+
+
+                <div class="row total-row row-flush">
+                    <div class="col6 payments">
+                        <h2>Payments</h2>
+                        {% with events=instance.payment_events.all %}
+                            <table class="table table-striped table-bordered table-hover">
+                                {% if events %}
+                                    <thead>
+                                        <tr>
+                                            <th>{% trans "Date" %}</th>
+                                            <th>{% trans "Event" %}</th>
+                                            <th>{% trans "Amount" %}</th>
+                                            <th>{% trans "Reference" %}</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for event in events %}
+                                            {% with line_qtys=event.line_quantities.all %}
+                                                <tr>
+                                                    <td >{{ event.date_created }}</td>
+                                                    <td >{{ event.event_type.name }}</td>
+                                                    <td >{{ event.amount|currency:instance.currency }}</td>
+                                                    <td >{{ event.reference|default:"-" }}</td>
+
+                                                </tr>
+                                            {% endwith %}
+                                        {% endfor %}
+                                    </tbody>
+                                {% else %}
+                                    <tbody>
+                                        <tr><td>{% trans "No payment events." %}</td></tr>
+                                    </tbody>
+                                {% endif %}
+                            </table>
+                        {% endwith %}
+                    </div>
+                    <div class="col6 total-detail">
+                        <table>
+
+                            <tbody>
+                                <tr>
+                                    <td class="def">Total excl VAT</td>
+                                    <td class="val">{{ instance.total_excl_tax|currency:instance.currency }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="def">VAT</td>
+                                    <td class="val">{{ instance.total_tax|currency:instance.currency }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="def tot">Total incl VAT</td>
+                                    <td class="val tot">{{ instance.total_incl_tax|currency:instance.currency }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                </div>
+
+
+        {% endblock %}
+
+    </div>
+
+
+    {% block footer %}
+        {% if buttons %}
+            <footer>
+                <div class="row">
+                    <div class="col6">
+                        <p>Change Status: </p>
+                        <div class="button-group">
+                            {% for status in  instance.available_statuses %}
+                                {% if status == "Cancelled" %}
+                                    <a href="/admin/shop/order/{{ instance.id }}/status/{{ status }}/"><button type="button" class="button no" name="button">{{ status }}</button></a>
+                                {% elif status == "Pending" %}
+                                    <a href="/admin/shop/order/{{ instance.id }}/status/{{ status }}/"><button type="button" class="button pending" name="button">{{ status }}</button></a>
+                                {% else %}
+                                    <a href="/admin/shop/order/{{ instance.id }}/status/{{ status }}/"><button type="button" class="button yes" name="button">{{ status }}</button></a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+
+                    </div>
+                    <div class="col6">
+                        <p>Other Actions:</p>
+
+                            <button type="button" class="button resendconfirmation">Resend Confirmation e-mail</button>
+                            <div class="resendconfirmation-input">
+                                <form class="resendconfirmation-form">
+                                    <input type="text" class="emailinput" name="" value="{{ instance.user.email }}">
+                                    <div class="button-group">
+                                        <button type="submit" data-url="/admin/shop/order/{{ instance.id }}/resendconfirmation/" class="button yes" name="button">SEND</button>
+                                        <button type="button" class="button no" name="button">CANCEL</button>
+                                    </div>
+                                </form>
+
+
+                            </div>
+                            <div class="loading">
+                                <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                            </div>
+
+                    </div>
+                </div>
+
+
+
+            </footer>
+        {% endif %}
+    {% endblock %}
+{% endblock %}

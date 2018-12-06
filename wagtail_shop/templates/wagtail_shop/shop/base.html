@@ -1,0 +1,18 @@
+{% load wagtailcore_tags %}
+<html>
+  <head>
+    <title>Shop</title>
+  </head>
+  <body>
+    <header>
+      {% block navigation %}
+      <ul>
+        <li><a href="{{ page.url }}">Shop</a></li>
+        <li><a href="{{ page.url }}basket/">Basket</a></li>
+      </ul>
+      {% endblock %}
+    </header>
+    {% block content %}
+    {% endblock %}
+  </body>
+</html>

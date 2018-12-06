@@ -1,0 +1,9 @@
+{% extends 'wagtail_shop/shop/base.html' %}
+{% block content %}
+{% for item in basket.lines.all %}
+{{ item.product }} x {{ item.quantity }} Total = {{ item.price_incl_tax }} {{ item.price_currency }}
+{% endfor %}
+{% for product in products %}
+<p>{{ product.title }}</p>
+{% endfor %}
+{% endblock %}
