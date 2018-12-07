@@ -8,10 +8,13 @@ from django.template.response import TemplateResponse
 
 class AbstractShopHome(RoutablePageMixin, Page):
     mode = getattr(settings, 'WAGTAIL_SHOP_OSCARMODE', False)
+    apiurl = getattr(settings, 'WAGTAIL_SHOP_APIURL', '/api')
     
     def get_context(self, request):
         products = get_model('catalogue', 'Product')
         context = super().get_context(request)
+        context['shopbaseurl'] = self.get_url(request)
+        context['apiurl'] = self.apiurl
         context['products'] = products.objects.all()
         return context 
     
