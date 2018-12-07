@@ -21,8 +21,6 @@ Quick start
 	'wagtail.contrib.routable_page',
 	'wagtail.contrib.modeladmin',
 	'widget_tweaks',
-	'rest_framework,
-	'oscarapi',
     ] + get_core_apps()
 
 3. Add ``oscar.apps.basket.middleware.BasketMiddleware`` to your MIDDLEWARE
