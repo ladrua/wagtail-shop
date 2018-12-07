@@ -9,15 +9,15 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='wagtail-shop',
-    install_requires=['wagtail','django-oscar','django-oscar-api'],
-    version='0.1.0',
+    install_requires=['wagtail','django-oscar'],
+    version='0.1.0b',
     packages=find_packages(),
     include_package_data=True,
     
     license='BSD License',  # example license
     description='Shop for Wagtail',
     long_description=README,
-    url='https://www.example.com/',
+    url='https://github.com/ladrua',
     author='Stian Aurdal',
     author_email='stian@aurdal.io',
     classifiers=[

@@ -175,13 +175,11 @@ class AbstractProduct(ClusterableModel, OscarAbstractProduct):
     description = RichTextField(blank=True)
     price = models.DecimalField(default=None, max_digits=18, decimal_places=2, blank=True, help_text="Price including VAT")
     sku = models.CharField(max_length = 255, blank=True )
-    guitar_attributes = StreamField([
-        ('neck', blocks.CharBlock()),
-        ('size', blocks.CharBlock()),
-    ], blank=True)
     default_attributes = StreamField([
-        ('weight', blocks.CharBlock()),
-        ('size', blocks.CharBlock()),
+        ('attribute', blocks.StructBlock([
+            ('key', blocks.CharBlock()),
+            ('value', blocks.CharBlock()),
+        ], icon='table'))
     ], blank=True)
 
     product_class = models.ForeignKey(

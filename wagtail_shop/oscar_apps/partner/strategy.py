@@ -1,5 +1,6 @@
 from decimal import Decimal as D
 from oscar.apps.partner import strategy, prices
+from django.conf import settings
 
 
 class Selector(object):
@@ -8,7 +9,7 @@ class Selector(object):
     """
 
     def strategy(self, request=None, user=None, **kwargs):
-        return UKStrategy()
+        return DefaultStrategy()
 
 
 class IncludingVAT(strategy.FixedRateTax):
@@ -19,10 +20,11 @@ class IncludingVAT(strategy.FixedRateTax):
     # this is a simplification: in reality, you might want to store tax
     # rates and the date ranges they apply in a database table.  Your
     # pricing policy could simply look up the appropriate rate.
-    rate = D('0.20')
+    default_vat = getattr(settings, 'WAGTAIL_SHOP_DEFAULT_VAT', '0')
+    rate = D(default_vat)
 
 
-class UKStrategy(strategy.UseFirstStockRecord, IncludingVAT,
+class DefaultStrategy(strategy.UseFirstStockRecord, IncludingVAT,
                  strategy.StockRequired, strategy.Structured):
     """
     Typical UK strategy for physical goods.
