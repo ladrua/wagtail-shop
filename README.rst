@@ -1,29 +1,32 @@
 =====
-Polls
+Wagtail Shop
 =====
 
-Polls is a simple Django app to conduct Web-based polls. For each
-question, visitors can choose between a fixed number of answers.
+Simple shop based on django-oscar.
 
-Detailed documentation is in the "docs" directory.
 
 Quick start
 -----------
 
-1. Add "polls" to your INSTALLED_APPS setting like this::
+1. Add 'from oscar.defaults import *' to your settings.py file.
 
-    INSTALLED_APPS = [
+2. Import and append "get_core_apps()" to your INSTALLED_APPS, and add required packages like this::
+
+     from wagtail_shop import get_core_apps
+
+     INSTALLED_APPS = [
         ...
-        'polls',
-    ]
+	'django.contrib.sites',
+	'django.contrib.flatpages',
+	'wagtail.contrib.routable_page',
+	'wagtail.contrib.modeladmin',
+	'widget_tweaks',
+	'rest_framework,
+	'oscarapi',
+    ] + get_core_apps()
 
-2. Include the polls URLconf in your project urls.py like this::
+3. Add 'oscar.apps.basket.middleware.BasketMiddleware' to your MIDDLEWARE
 
-    path('polls/', include('polls.urls')),
+4. Run migrations './manage.py migrate'
 
-3. Run `python manage.py migrate` to create the polls models.
-
-4. Start the development server and visit http://127.0.0.1:8000/admin/
-   to create a poll (you'll need the Admin app enabled).
-
-5. Visit http://127.0.0.1:8000/polls/ to participate in the poll.
+5. Before you can add any products you must create at least one "Product Type" and add one "Partner" in the Wagtail admin interface.

@@ -28,4 +28,5 @@ wagtail_shop/templates/wagtail_shop/admin/order/inspect.html
 wagtail_shop/templates/wagtail_shop/admin/order/list.html
 wagtail_shop/templates/wagtail_shop/admin/product/create.html
 wagtail_shop/templates/wagtail_shop/admin/product/list.html
-wagtail_shop/templates/wagtail_shop/basket/messages/addition.html
+wagtail_shop/templates/wagtail_shop/shop/base.html
+wagtail_shop/templates/wagtail_shop/shop/basket.html
