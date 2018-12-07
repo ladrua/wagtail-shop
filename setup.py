@@ -1,7 +1,7 @@
 import os
 from setuptools import find_packages, setup
 
-with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as readme:
+with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
     README = readme.read()
 
 # allow setup.py to be run from any path
@@ -17,7 +17,7 @@ setup(
     license='BSD License',  # example license
     description='Shop for Wagtail',
     long_description=README,
-    url='https://github.com/ladrua',
+    url='https://github.com/ladrua/wagtail-shop',
     author='Stian Aurdal',
     author_email='stian@aurdal.io',
     classifiers=[
