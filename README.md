@@ -43,6 +43,6 @@ There are a few exceptions:
 
 Screenshots
 -----------
-![Product detail](/screenshots/product-list?raw=true "Product list")
+![Product detail](/screenshots/product-list.png?raw=true "Product list")
 
-![Product detail](/screenshots/product-detail?raw=true "Product detail")
+![Product detail](/screenshots/product-detail.png?raw=true "Product detail")
