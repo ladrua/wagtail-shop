@@ -70,11 +70,13 @@ class MyCustomCreateView(CreateView):
         original_edit_handler = self.model.edit_handler
         product_class = self.get_product_class()
         
-        if product_class and product_class.name == 'Guitar':
-            attributes_panels = [ StreamFieldPanel('guitar_attributes') ]
-        else:
-            attributes_panels = self.model.attributes_panels
-            
+        # if product_class and product_class.name == 'Guitar':
+        #     attributes_panels = [ StreamFieldPanel('guitar_attributes') ]
+        # else:
+        #     attributes_panels = self.model.attributes_panels
+
+        attributes_panels = self.model.attributes_panels
+        
         edit_handler = TabbedInterface([
             ObjectList(self.model.general_panels, heading='General'),
             ObjectList(attributes_panels, heading='Attributes'),
@@ -99,11 +101,12 @@ class MyCustomEditView(EditView):
     def get_edit_handler(self):
         original_edit_handler = self.model.edit_handler
         
-        if self.instance.product_class and self.instance.product_class.name == 'Guitar':
-            attributes_panels = [ StreamFieldPanel('guitar_attributes') ]
-        else:
-            attributes_panels = self.model.attributes_panels
-            
+        # if self.instance.product_class and self.instance.product_class.name == 'Guitar':
+        #     attributes_panels = [ StreamFieldPanel('guitar_attributes') ]
+        # else:
+        #     attributes_panels = self.model.attributes_panels
+
+        attributes_panels = self.model.attributes_panels    
         edit_handler = TabbedInterface([
             ObjectList(self.model.general_panels, heading='General'),
             ObjectList(attributes_panels, heading='Attributes'),

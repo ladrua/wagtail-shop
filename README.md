@@ -41,4 +41,8 @@ There are a few exceptions:
 
 2. If setting up with the default templates provided with django-oscar, the images won't work, and you would have to update the image tags in the template to use [Wagtails image tags](https://docs.wagtail.io/en/latest/topics/images.html) 
 
+Screenshots
+-----------
+![Product detail](/screenshots/product-list?raw=true "Product list")
 
+![Product detail](/screenshots/product-detail?raw=true "Product detail")
