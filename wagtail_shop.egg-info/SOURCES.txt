@@ -1,6 +1,6 @@
 LICENSE
 MANIFEST.in
-README.rst
+README.md
 setup.py
 wagtail_shop/__init__.py
 wagtail_shop/abstract_models.py
