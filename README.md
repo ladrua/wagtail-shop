@@ -1,9 +1,11 @@
 Wagtail Shop
 =====
 
-Simple shop based on [django-oscar](https://github.com/django-oscar/django-oscar).
+Using Wagtail as admin for [django-oscar](https://github.com/django-oscar/django-oscar).
 
 **NB: This is currently in beta**
+
+The overal goal of this project is to be able to administer all aspects of django-oscar from the wagtail admin.
 
 Quick start
 -----------
