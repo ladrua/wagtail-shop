@@ -23,6 +23,7 @@ Todo:
 
 * Manage Customers.
 * Better handling of StockRecords.
+* Add a `ProductChooser` to use in Pages.
 
 Quick start
 -----------
