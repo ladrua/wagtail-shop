@@ -7,6 +7,23 @@ Using Wagtail as admin for [django-oscar](https://github.com/django-oscar/django
 
 The overal goal of this project is to be able to administer all aspects of django-oscar from the wagtail admin.
 
+Status
+------
+Features:
+
+* Add/Edit Products.
+* Add/Edit Categories.
+* View Orders.
+* Add/Edit Product Classes.
+* Add/Edit Partners.
+* Add/Edit StockRecords.
+
+
+Todo:
+
+* Manage Customers.
+* Better handling of StockRecords.
+
 Quick start
 -----------
 
